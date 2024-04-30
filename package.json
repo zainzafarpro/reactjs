@@ -1,0 +1,26 @@
+{
+  "name": "example-react-app",
+  "version": "1.0.0",
+  "description": "Training Namaste React",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/zainzafarpro/reactjs.git"
+  },
+  "keywords": [
+    "react",
+    "javascript"
+  ],
+  "author": "Zain Zafar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zainzafarpro/reactjs/issues"
+  },
+  "homepage": "https://github.com/zainzafarpro/reactjs#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+}

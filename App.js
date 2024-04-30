@@ -1,18 +1,3 @@
-# React JS - a powerful JavaScript library | Notes from Namste React
-
-What is the difference between a library and a framework?
-
-A library can work independently in a existing project or a small portion of the page whereas a framework comes along with whole lots of utilities and its environment.
-
-> React can be included via CDN also.
-
-# Episode - 1
-
-```html
-<div id="root"></div>
-```
-
-```javascript
 // This is how we can create an element in react using React API which is provided by React CDN.
 const heading = React.createElement("h1", {
     id: "heading",
@@ -44,39 +29,3 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 // This is how we can render a element inside our container in react, when the heading variable is passed to render() function. This funtion will create a h1 tag and will push the props inside it, props are the attribute and children of React Element.
 root.render(heading); // this is converting the "heading" object into an actual h1 tag and pushing it into the #root div and replacing everything if we have written something directly into our html file.
-```
-
-# Episode - 2
-
-we have enabled our repository with npm using the command called `npm init`.
-When we use npm init it will create a package.json file, this file will keep a track of our dependencies.
-After that we have installed a bunlder called parcel, This bundler will help us bundle our code which will be used on production
-
-```json
-{
-  "name": "example-react-app",
-  "version": "1.0.0",
-  "description": "Training Namaste React",
-  "main": "App.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/zainzafarpro/reactjs.git"
-  },
-  "keywords": [
-    "react",
-    "javascript"
-  ],
-  "author": "Zain Zafar",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/zainzafarpro/reactjs/issues"
-  },
-  "homepage": "https://github.com/zainzafarpro/reactjs#readme",
-  "devDependencies": {
-    "parcel": "^2.12.0"
-  }
-}
-```
