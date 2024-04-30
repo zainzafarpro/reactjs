@@ -52,6 +52,20 @@ we have enabled our repository with npm using the command called `npm init`.
 When we use npm init it will create a package.json file, this file is basically a configuration which will keep a track of our dependencies and app version.
 After that we have installed a bunlder called parcel, This bundler will help us bundle our code which will be used on production
 
+**What Parcel do?**
+- Dev builds
+- local server
+- HMR = Hot module replacement(auto refresh)
+- File watching Alogrithm - written in c++
+- Caching 
+- Image Optimization
+- Minification - Bundling files
+- Compress files
+- Consistent Hashing
+- Code spliting
+- Dignostics
+- Tree Shaking - will remove unused code
+
 ```json
 {
   "name": "example-react-app",
@@ -83,6 +97,9 @@ After that we have installed a bunlder called parcel, This bundler will help us 
 ```
 After installing the bundler a package-lock.json will be created. This file is also a configuration file and it will keep a track of exact version that is being installed. It kinds of lock the versions of dependencies and keeps a record of it.
 
-What is the difference between devDependencies and dependencies in package.json?
+**What is the difference between devDependencies and dependencies in package.json?**
 
 A devDependencie is only required when development of the project is going. it is not required on the Production whereas a dependencie is required on production also.
+
+**what is npx?**
+npx means executing a package. The syntax should be `npx <package name>`. Here in this case we have ignited our app using parcel and the command which we used is `npx parcel index.html`. This will run our app onto a localhost server.

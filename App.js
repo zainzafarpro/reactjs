@@ -1,7 +1,11 @@
+import React from "react";
+
+import ReactDOM from "react-dom/client";
+
 // This is how we can create an element in react using React API which is provided by React CDN.
 const heading = React.createElement("h1", {
     id: "heading",
-    class: "now"
+    className: "now"
 }, "Hello React js");
 
 
@@ -14,11 +18,11 @@ console.log(heading); // returns a object.
 
 // this is how you can create a nested structure in which the 3rd argument will be an array which takes the reactElement.
 const nestedStructure = React.createElement("div", {id: "parent"}, [
-    React.createElement("div", {class: 'child'}, [
-        React.createElement("h1", {class:'heading'}, "hello h1")
+    React.createElement("div", {className: 'child'}, [
+        React.createElement("h1", {className:'heading'}, "hello h1")
     ]),
-    React.createElement("div", {class: 'chil2'}, [
-        React.createElement("h2", {class:'heading'}, "hello h2")
+    React.createElement("div", {className: 'chil2'}, [
+        React.createElement("h2", {className:'heading'}, "hello h2")
     ]),
 ]);
 
