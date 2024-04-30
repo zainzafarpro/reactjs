@@ -76,7 +76,7 @@ After that we have installed a bunlder called parcel, This bundler will help us 
   },
   "homepage": "https://github.com/zainzafarpro/reactjs#readme",
   "devDependencies": {
-    // that small hat sign is a caret, this means if there is a small version available for example 2.12.13 then update it automatically. we can use '~' tilde for the major upgrade.
+    "_comment": "that small hat sign is a caret, this means if there is a small version available for example 2.12.13 then update it automatically. we can use '~' tilde for the major upgrade.",
     "parcel": "^2.12.0"
   }
 }
