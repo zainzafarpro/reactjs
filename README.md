@@ -49,7 +49,7 @@ root.render(heading); // this is converting the "heading" object into an actual 
 # Episode - 2
 
 we have enabled our repository with npm using the command called `npm init`.
-When we use npm init it will create a package.json file, this file will keep a track of our dependencies.
+When we use npm init it will create a package.json file, this file is basically a configuration which will keep a track of our dependencies and app version.
 After that we have installed a bunlder called parcel, This bundler will help us bundle our code which will be used on production
 
 ```json
@@ -76,7 +76,13 @@ After that we have installed a bunlder called parcel, This bundler will help us 
   },
   "homepage": "https://github.com/zainzafarpro/reactjs#readme",
   "devDependencies": {
+    // that small hat sign is a caret, this means if there is a small version available for example 2.12.13 then update it automatically. we can use '~' tilde for the major upgrade.
     "parcel": "^2.12.0"
   }
 }
 ```
+After installing the bundler a package-lock.json will be created. This file is also a configuration file and it will keep a track of exact version that is being installed. It kinds of lock the versions of dependencies and keeps a record of it.
+
+What is the difference between devDependencies and dependencies in package.json?
+
+A devDependencie is only required when development of the project is going. it is not required on the Production whereas a dependencie is required on production also.
