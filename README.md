@@ -50,7 +50,7 @@ root.render(heading); // this is converting the "heading" object into an actual 
 
 we have enabled our repository with npm using the command called `npm init`.
 When we use npm init it will create a package.json file, this file is basically a configuration which will keep a track of our dependencies and app version.
-After that we have installed a bunlder called parcel, This bundler will help us bundle our code which will be used on production
+After that we have installed a bundler called parcel, This bundler will help us bundle our code which will be used on production
 
 **What Parcel do?**
 - Dev builds
@@ -71,7 +71,6 @@ After that we have installed a bunlder called parcel, This bundler will help us 
   "name": "example-react-app",
   "version": "1.0.0",
   "description": "Training Namaste React",
-  "main": "App.js",
   "scripts": {
     "test": "jest"
   },
@@ -102,4 +101,5 @@ After installing the bundler a package-lock.json will be created. This file is a
 A devDependencie is only required when development of the project is going. it is not required on the Production whereas a dependencie is required on production also.
 
 **what is npx?**
+
 npx means executing a package. The syntax should be `npx <package name>`. Here in this case we have ignited our app using parcel and the command which we used is `npx parcel index.html`. This will run our app onto a localhost server.
