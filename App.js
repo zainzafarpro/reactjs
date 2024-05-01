@@ -1,45 +1,82 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-//JSX => JSX is a syntax extention of JavaScript, its a HTML-like syntax
-
-const jsxHeading = (
-    <h1 id="heading" className="text">Thi is JSX h1 element</h1>
-)
-
-// This will return an object similar to React.createElement()
-
-console.log(jsxHeading);
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(jsxHeading);
-
-// Functional components in React. Function components will always be written with Capital letter and it will return a React Element. 
-
-const Title = () => (
-    <div className="title">This is a Title which will be called in other component</div>
-);
-
-const randomenumber = 1132138312;
-
-const HeadingComponent = () => {
+const HeaderComponent = () => {
     return (
-        <> 
-            {/* this is called component composition, there are multiple ways to inject a component inside a component. */}
-            <Title />
-            <Title></Title>
-            {Title()}
-            
-            {/* in these curly brakcets we can write any piece of javaScript code*/}
-            {jsxHeading}
-            {10 * 10 - 10}
-            {randomenumber}
-
-            <div className="hello">
-                <h1>Hello</h1>
+        <div className="header">
+            <div className="logo">
+                <img width="100" src="https://zain-me.web.app/images/mypic.jpg" />
             </div>
-        </>
+            <nav className="nav">
+                <ul>
+                    <li>List 1</li>
+                    <li>List 2</li>
+                    <li>List 3</li>
+                    <li>List 4</li>
+                </ul>
+            </nav>
+        </div>
     )
 };
 
-root.render(<HeadingComponent />)
+const hotelList = [
+    {
+        id: "123",
+        name: "name 1",
+        description: "desp 1",
+        location: "locate 1"
+    },
+    {
+        id: "125",
+        name: "name 2",
+        description: "desp 2",
+        location: "locate 2"
+    },
+    {
+        id: "124",
+        name: "name 3",
+        description: "desp 3",
+        location: "locate 3"
+    }
+]
+
+const Hotel = (props) => {
+    const {data} = props;
+    const {
+        name,
+        description,
+        location
+    } = data;
+
+    return (
+        <div className="hotel">
+            <strong className="name">{name}</strong>
+            <p className="description">{description}</p>
+            <span className="location">{location}</span>
+        </div>
+    )
+}
+
+const HotelList = () => {
+    return (
+        <div className="hotels">
+             {hotelList.map(function (hotel, index) {
+                return (
+                    <Hotel key={index} data={hotel}/>
+                )
+             })}
+        </div>
+    )
+}
+
+const AppLayout = () => {
+    return (
+        <div className="wrapper">
+            <HeaderComponent />
+            <HotelList />
+        </div>
+    )
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<AppLayout />)

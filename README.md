@@ -223,3 +223,32 @@ const Heading2Component = () => (
   <>
 );
 ```
+
+# Epsisode - 4
+
+**What are the Props?**
+
+Props are the short form of properties which we can pass to a component. React Functional components are the normal functions so you can say the props are the arguments which is passed to a Function.
+
+```jsx
+/**
+ * This is how we receive props aka arguments into a Functional Component.
+ * Here props is an object, whatever is passed to a Hotel component when called, React will wrap everything into an object and send it to it's main function.
+*/
+const Hotel = (props) => {
+    console.log(props)
+    return (
+        <div className="hotel">
+            <strong className="name">{props.name}</strong>
+            <p className="description">{props.description}</p>
+            <span className="location">{props.location}</span>
+        </div>
+    )
+}
+
+/**
+ * This is how we can pass props to a Component.
+ * All of these properties will be wrapped inside an object when we receive it where this component is written
+*/
+<Hotel name="HOne" description="Lorem ipsum dollar site emat" location="Davis road"/>
+```
