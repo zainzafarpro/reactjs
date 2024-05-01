@@ -53,6 +53,9 @@ When we use npm init it will create a package.json file, this file is basically 
 After that we have installed a bundler called parcel, This bundler will help us bundle our code which will be used on production
 
 **What Parcel do?**
+
+Parcel itself doesn't do much but it gives responsibility of different tasks to different packages. So Parcel is like a manager.
+
 - Dev builds
 - local server
 - HMR = Hot module replacement(auto refresh)
@@ -89,7 +92,7 @@ After that we have installed a bundler called parcel, This bundler will help us 
   },
   "homepage": "https://github.com/zainzafarpro/reactjs#readme",
   "devDependencies": {
-    "_comment": "that small hat sign is a caret, this means if there is a small version available for example 2.12.13 then update it automatically. we can use '~' tilde for the major upgrade.",
+    //that small hat sign is a caret, this means if there is a small version upgrade available for example 2.12.13 then update it automatically. we can use '~' tilde for the major upgrade.
     "parcel": "^2.12.0"
   }
 }
@@ -100,6 +103,69 @@ After installing the bundler a package-lock.json will be created. This file is a
 
 A devDependencie is only required when development of the project is going. it is not required on the Production whereas a dependencie is required on production also.
 
-**what is npx?**
+**What is npx?**
 
-npx means executing a package. The syntax should be `npx <package name>`. Here in this case we have ignited our app using parcel and the command which we used is `npx parcel index.html`. This will run our app onto a localhost server.
+npx means executing a npm package. The syntax should be `npx <package name>`. Here in this case we have ignited our app using parcel and the command which we used is `npx parcel index.html`. This will run our app onto a localhost server.
+
+
+# Episode - 3
+
+Added 2 commands in package.json
+
+```json
+"start": "parcel index.html",
+"build": "parcel build index.html"
+```
+
+**What is JSX?**
+
+JSX is a syntax extention of JavaScript, its a HTML-like syntax it is behind the scene is `React.createElement()`. If we `console.log(jsxHeading)` it will return us an object same as `React.createElement()`. we use JSX inside react applications because it is more cleaner and easy way to write code in React. JSX is not a valid JavaScript code, a JS engine does not understand JSX directly, if you run this code directly into the browser console you will get an error. JSX needs to be transpiled into the valid javaScript code and then it will run on browsers.  In this case Parcel gives this responsibility to Babel which is also a npm package. Babel is a javaScript compiler which transpile the code into valid js code which JS engine understands. In this case Babel is transpiling JSX into the JavaScript code.
+
+> JSX is not part of React.js
+
+```jsx
+// This behind the scene creates an element using React.createElement().
+const jsxHeading = <h1>Thi is JSX h1 element</h1>; // will return an {object}
+```
+
+If we need to write JSX in multiple lines then we need to wrap our code into rounded brackets (); something like this
+
+```jsx
+const multiLine = (<div>
+    <h1>text</h1>
+</div>)
+```
+
+
+**What is React Component?**
+
+There are 2 types of components in React.
+
+- Class based Components
+  Class based components uses JavaScript classes to create React components.
+
+- Functional Components
+  Functional components uses JavaScript function to create React components.
+
+
+**Example of Functional Components**
+
+Functional Components are the normal JavaScript functions. In React we need to write functional components with first uppercase letter. This is a react way to create a component. 
+
+
+```jsx
+const HeadingComponent = () => {
+    return (
+        <div className="hello">
+            hello
+        </div>
+    );
+};
+
+// if we dont write return then the curely brackets will be removed and we will wrap our jsx code into rounded brackets directly.
+const Heading2Component = () => (
+  <div className="hello">
+      hello
+  </div>
+);
+```
