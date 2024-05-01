@@ -110,7 +110,7 @@ npx means executing a npm package. The syntax should be `npx <package name>`. He
 
 # Episode - 3
 
-Added 2 commands in package.json
+Added 2 scripts in package.json so that we can simply ignite our app using a npm command instead of executing package directly using npx
 
 ```json
 "start": "parcel index.html",
@@ -119,7 +119,7 @@ Added 2 commands in package.json
 
 **What is JSX?**
 
-JSX is a syntax extention of JavaScript, its a HTML-like syntax it is behind the scene is `React.createElement()`. If we `console.log(jsxHeading)` it will return us an object same as `React.createElement()`. we use JSX inside react applications because it is more cleaner and easy way to write code in React. JSX is not a valid JavaScript code, a JS engine does not understand JSX directly, if you run this code directly into the browser console you will get an error. JSX needs to be transpiled into the valid javaScript code and then it will run on browsers.  In this case Parcel gives this responsibility to Babel which is also a npm package. Babel is a javaScript compiler which transpile the code into valid js code which JS engine understands. In this case Babel is transpiling JSX into the JavaScript code.
+JSX is a syntax extention of JavaScript, its a HTML-like syntax it is behind the scene is `React.createElement()`. If we `console.log(jsxHeading)` it will return us an object same as `React.createElement()`. we use JSX inside react applications because it is more readable and easy way to write code in React. JSX is not a valid JavaScript code, a JS engine does not understand JSX directly, JSX starts from rounded bracket and ends on rounded bracket. if you run this code directly into the browser console you will get an error. JSX needs to be transpiled into the valid javaScript code and then it will run on browsers.  In this case Parcel gives this responsibility to Babel which is also a npm package. Babel is a javaScript compiler which transpile the code into valid js code which JS engine understands. In this case Babel is transpiling JSX into the JavaScript code.
 
 > JSX is not part of React.js
 
@@ -141,19 +141,20 @@ const multiLine = (<div>
 
 There are 2 types of components in React.
 
-- Class based Components
+- Class based Components:
   Class based components uses JavaScript classes to create React components.
 
-- Functional Components
+- Functional Components:
   Functional components uses JavaScript function to create React components.
 
 
 **Example of Functional Components**
 
-Functional Components are the normal JavaScript functions. In React we need to write functional components with first uppercase letter. This is a react way to create a component. 
+Functional Components are the normal JavaScript functions. In React we need to write functional components with Capital latter. This is a react way to create a component. Functional component returns a React Element in the end or a jsx code.
 
 
 ```jsx
+// Functional component
 const HeadingComponent = () => {
     return (
         <div className="hello">
@@ -162,10 +163,63 @@ const HeadingComponent = () => {
     );
 };
 
-// if we dont write return then the curely brackets will be removed and we will wrap our jsx code into rounded brackets directly.
+/**
+ * if we dont write return then the curely brackets will be removed,
+ *  and we will wrap our jsx code into rounded brackets directly.
+ * */
+
 const Heading2Component = () => (
   <div className="hello">
       hello
   </div>
+);
+
+/**
+ * This is a way to render functional component
+*/
+root.render(<Heading2Component />)
+
+/**
+ * This is a way to render React Element
+*/
+
+root.render(heading)
+```
+
+**Component Composition**
+
+Component Composition is known as calling a component inside another component.
+
+```jsx
+const Heading2Component = () => (
+  <div className="hello">
+    <HeadingComponent />
+      hello
+  </div>
+);
+
+/**
+ * if we want to write any JavaScript code or a React Element inside our Component.
+ * Then we need to follow the the below example.
+ */
+
+// in curly brackets we can write any piece of javaScript code.
+// at the end of the day React Components are the normal javaScript functions so we can call them as normal function inside curly brakcets
+const Heading2Component = () => (
+  <>
+    {jsxHeading}
+    {10 * 10}
+    {"zain" + "zafar"}
+
+    <HeadingComponent />
+    
+    <HeadingComponent></HeadingComponent>
+    
+    {HeadingComponent()}
+    
+    <div className="hello">
+        hello
+    </div>
+  <>
 );
 ```
