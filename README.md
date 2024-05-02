@@ -342,3 +342,11 @@ const Body =  () => {
 }
 
 ```
+> React is good at DOM manipulation, This is the core of react. Thats why we call React is fast.
+
+**What is Virtual DOM?**
+
+Its not an actual DOM, Virtual DOM is a reprsentation of an actual DOM.
+It is a basically those React Elements which we have read above, Virtual DOM is nothing but a JavaScript object.
+`console.log(<Body />)` this will show us an object inside the browser console, That object represents 
+the actual DOM of Body() Component.
