@@ -252,3 +252,93 @@ const Hotel = (props) => {
 */
 <Hotel name="HOne" description="Lorem ipsum dollar site emat" location="Davis road"/>
 ```
+
+# Episode - 5
+
+**File structure in React**
+
+React doesn't have any opinion about the file structure, So we can follow any file structure we want. We will be keeping our file and folder structure simple and plain. All of the components will go to component folder and each component file will have the same name as the component function. `Header.js` file will have Header component.
+
+
+**Import your component in main file**
+
+We now have separate files for each component, We must export the component from file and then we will be able to import the component.
+There are 2 types of exports, default export and named export.
+If we have to export single thing from a file then we use default keyword. If we have to export multiple things from a single file
+Then we have to use named export.
+
+```jsx
+// This is how we should export our component, this is also known as default export. We cannot write this statement multiple times.
+export default HeaderComponent;
+
+// This how we should import our component. This is importing a default export component.
+import HeaderComponent from "./components/HeaderComponent";
+```
+
+Named export and import example:
+
+When we do named export then while importing we need to put curly brackets and in curly brackets the name of Component/variable
+which we named exported it and then the file path.
+
+```jsx
+export const CDN_URL = "https://www.test.com";
+export const LOGO_URL = "https://www.test1.com";
+
+import { CND_URL, LOGO_URL } from "config/config.js";
+```
+
+**What is React Hooks? **
+
+Its a normal javaScript function, you can say a utility function, it gives us powerful state variables.
+There are multiple react hooks, But we are only going to talk about 2 very important powerful hooks.
+
+- useState() - This gives us super powerful react variables;
+- useEffect();
+
+We have to import hooks from our React package and it will be a named import.
+useState() returns us an array with with 2 variables, 1st is a current state variable and 2nd is a functionn which
+updates a value of state variable
+
+`import {useState} from "react";`
+
+Difference between creating a normal variable and state variable.
+
+```jsx
+// This is how we create a normal variable.
+let xyz = 0;
+
+// This is how we update or modify a normal JS variable
+xyz = 123
+
+
+/**
+ * This is how we create a state variable.
+ * Whatever we pass to useState() function becomes a default value of xyz variable.
+ * We call and name this variable as a normal JS variable
+*/
+let [xyz, setXyz] = useState(0);
+
+/**
+ * To update or modify the xyz variable, we will have to use the second parameter of the array which is a Function.
+ * We can call and name this function as a normal function.
+*/
+
+setXyz(123) // This will update the value and state of xyz variable.
+
+```
+
+Whenever State variable is updated React will re-render that Component where the state variable is located.
+For example we have a component called Body() and we have a state variable inside it.
+Whenever we update a state variable using the setState() function our Body() component will be re-rendered.
+
+```jsx
+
+const Body =  () => {
+  const [state, setState] = useState(0);
+
+  return (
+    setState(123);
+  )
+}
+
+```

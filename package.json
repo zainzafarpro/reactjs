@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Training Namaste React",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel index.html && parcel build global.scss",
     "build": "parcel build index.html",
     "test": "jest"
   },
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/zainzafarpro/reactjs#readme",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.12.0",
     "parcel": "^2.12.0",
     "process": "^0.11.10"
   },
