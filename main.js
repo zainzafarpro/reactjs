@@ -201,7 +201,8 @@ what is async function? and how it is different from normal function?
 // async function returns a Promise.
 async function testAsync() {
     // await keyword can only be used inside async function and it expects a promise, we should write it infront of promise.
-    // if we put any code before this line, the javascript engine won't wait for the promise to be resolved, it will quickly execute the code but if we put any code after the await keyword js engine appears to wait for the promise and won't go to the next line. in a traditional way this is not the case.
+    // if we put any code before this line, the javascript engine won't wait for the promise to be resolved, 
+    //it will quickly execute the code but if we put any code after the await keyword js engine appears to wait for the promise and won't go to the next line. in a traditional way this is not the case.
     const res = await promiseValue;
 
     // here in async await, the text will be printed after the promise when it is settled.
@@ -233,7 +234,9 @@ function getValue() {
 
     promiseValue.then((res) => { console.log(res) });
 
-    // here in a traditional way of handling promise, the text will be printed even if promise is settled or not or any code after the "then" statement, code will quickly be executed.
+    // here in a traditional way of handling promise, 
+    //the text will be printed even if promise is settled or not or any code after the "then" statement,
+    //code will quickly be executed.
     console.log("this text will be printed before the promise is resolved, it won't wait a for a promise to be resolved");
 }
 

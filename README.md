@@ -287,13 +287,13 @@ export const LOGO_URL = "https://www.test1.com";
 import { CND_URL, LOGO_URL } from "config/config.js";
 ```
 
-**What is React Hooks? **
+**What is React Hooks?**
 
 Its a normal javaScript function, you can say a utility function, it gives us powerful state variables.
 There are multiple react hooks, But we are only going to talk about 2 very important powerful hooks.
 
 - useState() - This gives us super powerful react variables;
-- useEffect();
+- useEffect() - 
 
 We have to import hooks from our React package and it will be a named import.
 useState() returns us an array with with 2 variables, 1st is a current state variable and 2nd is a functionn which
@@ -342,6 +342,16 @@ const Body =  () => {
 }
 
 ```
+
+**Intro to useEffect() - A react hook**
+
+useEffect() is also a react hook and this is also a plain javascript function at the end. To import this hook in our project we have to do a named import
+`import {useEffect} from "react";`.
+useEffect hook takes 2 arguments. 1st a callback function and 2nd a dependency array `useEffect( () => {}, [])`.
+useEffect is called when our component is fully loaded and rendered. So whatever we pass inside useEffect's callback function it will be called after the component is rendered. 2nd argument is a dependency array in which we pass the dependency, it means now useEffect is dependent on the element which is passed inside the 2nd argument array, whenever the dependency changes useEffect will be called. if we pass nothing then it will be dependent on the component and now useEffect is called whenever the component is rendered. 
+>2nd argument is a option argument.
+
+
 > React is good at DOM manipulation, This is the core of react. Thats why we call React is fast.
 
 **What is Virtual DOM?**
@@ -350,3 +360,29 @@ Its not an actual DOM, Virtual DOM is a reprsentation of an actual DOM.
 It is a basically those React Elements which we have read above, Virtual DOM is nothing but a JavaScript object.
 `console.log(<Body />)` this will show us an object inside the browser console, That object represents 
 the actual DOM of Body() Component.
+
+
+# Epsisode - 6
+
+
+**Monolith Architechture**
+
+This is a old way to develop web apps or a big size application, Where all the code API's and other services are written in a same project and when a small change needs to be made. A whole project needs to be compiled and deployed.
+
+**Microservices Architechture**
+
+In today's world we separated our applications in to small pieces, this is called microservices architecture. In microservices for example we have separate project or services for each element.
+
+
+**Different Approaches of calling backend API's in React**
+
+There are two ways of calling or communicating with backend API's.
+
+- App loads -> call the API -> Render
+- App loads -> Render -> call the API -> re-render
+
+We will follow the 2nd approach in react, because this saves time and its a better approach in terms of UX.
+
+
+# Episode - 7
+

@@ -1,15 +1,22 @@
+import {useState} from "react";
+
 export const HeaderComponent = () => {
+    const [loginBtn, setLoginBtn] = useState("Login")
     return (
         <div className="header">
             <div className="logo">
-                <img width="100" src="https://placehold.co/200x200" />
+                <img src="https://placehold.co/100x50" />
             </div>
             <nav className="nav">
                 <ul>
-                    <li>List 1</li>
-                    <li>List 2</li>
-                    <li>List 3</li>
-                    <li>List 4</li>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Cart</li>
+                    <li>
+                        <button onClick={() => {
+                            setLoginBtn("Logout")
+                        }}>{loginBtn}</button>
+                    </li>
                 </ul>
             </nav>
         </div>
