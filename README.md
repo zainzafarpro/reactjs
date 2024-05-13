@@ -327,6 +327,8 @@ setXyz(123) // This will update the value and state of xyz variable.
 
 ```
 
+>Never update your state variable directly by using equal to sign `xyz = 1`
+
 Whenever State variable is updated React will re-render that Component where the state variable is located.
 For example we have a component called Body() and we have a state variable inside it.
 Whenever we update a state variable using the setState() function our Body() component will be re-rendered.
@@ -348,7 +350,7 @@ const Body =  () => {
 useEffect() is also a react hook and this is also a plain javascript function at the end. To import this hook in our project we have to do a named import
 `import {useEffect} from "react";`.
 useEffect hook takes 2 arguments. 1st a callback function and 2nd a dependency array `useEffect( () => {}, [])`.
-useEffect is called when our component is fully loaded and rendered. So whatever we pass inside useEffect's callback function it will be called after the component is rendered. 2nd argument is a dependency array in which we pass the dependency, it means now useEffect is dependent on the element which is passed inside the 2nd argument array, whenever the dependency changes useEffect will be called. if we pass nothing then it will be dependent on the component and now useEffect is called whenever the component is rendered. 
+useEffect is called when our component is fully loaded and rendered. So whatever we pass inside useEffect's callback function it will be called after the component is rendered. 2nd argument is a dependency array in which we pass the dependency, it means now useEffect is dependent on the element which is passed inside the 2nd argument array, whenever the dependency changes useEffect will be called. if we pass nothing then it will be dependent on the component and now useEffect is called whenever the component is rendered or re-rendered. 
 >2nd argument is a option argument.
 
 
@@ -386,3 +388,175 @@ We will follow the 2nd approach in react, because this saves time and its a bett
 
 # Episode - 7
 
+**Routing in React**
+ 
+ For routing in react we will be using a javascript npm package called "react-router-dom", In React, we navigate to different pages, those pages are nothing but a combination of components.
+ Install react-router-dom using command `npm i react-router-dom`. React router dom provide us 2 items and we will named import them.
+ 1st is a function and 2nd is a React Component.
+ `import {createBrowserRouter, RouterProvider} from "react-router-dom";`
+ createBrowserRouter is a function which takes a list of configuration, a list of object where we define the path and the element which we want to render onto that path.
+
+ ```jsx
+ // This function takes an array as argument and array should contain list of objects.
+ // In each object we have 2 properties, path: and element: in path we define our rout and in element we define our component 
+ // which needs to be rendered
+ 
+ const routes = createBrowserRouter([
+    {
+        path: '/',
+        element: <AppLayout />
+    },
+    {
+        path: '/about',
+        element: <About />
+    }
+])
+ ```
+
+ To render this configuration we use `<RouterProvider />` component in our main `render()` function and pass the routing configuration.
+
+ ```jsx
+ root.render(<RouterProvider router={routes}>)
+ ```
+
+**Link in react-router-dom**
+
+react-router-dom provides us a component called `<Link></Link>`, if we use simple `<a href=""></a>` tag directly inside our react application, 
+it will reload the webpage when click, So React provide this special component to load the components onto our webpage without reloading the whole tab. This component uses `to={}` attribute to define the path.
+
+```jsx
+<Link to={'/about'}>About US</Link>
+```
+
+ **Handle Error in Routes**
+
+ To handle Error in our routes, react-router-dom provide us a hook called `useRoutError()`, 
+ named import this hook in out project `import { useRouteError } from "react-router-dom";` and we can now use it as a simple function 
+ `const err = useRouteError();`
+
+Now to handle error in our path we will define a new property in our route configuration called `errorElement:` in this property we will pass out component which we want to render when we face an error in our routing.
+
+ ```jsx
+ const routes = createBrowserRouter([
+    {
+        path: '/',
+        element: <AppLayout />,
+        errorElement: <PageNotFound />
+    },
+    {
+        path: '/about',
+        element: <About />,
+        errorElement: <PageNotFound />
+    }
+])
+ ```
+
+ # Episode - 8
+
+ **Class based Components**
+
+Class based component is a older way of creating components in react.
+in React we create class based component by following this syntax `class <Name of Component> extends React.Component`.
+`extends React.component` is a class which is given us by React, it tells React that this is a class based component.
+In class based component we now have a `render()` method which returns a piece of jsx code.
+
+
+Example of creating a class based component.
+```jsx
+import React from "react";
+
+class About extends React.Component {
+    constructor (props) {
+        super(props)
+
+        console.log(this.props)
+    }
+
+    render() {
+        return (
+            <div>
+                About us {this.props.name}
+            </div>
+        )
+    }
+}
+
+export default About;
+
+<Abou name={"test"}>
+```
+In Class based components we must use `constructor()` and `super()` inside it becuase we are extending a React class which has already a constructor
+by using super `this` scope is properly initlized and we can use `this.props` anywhere in our component.
+
+**Creating and updating state variables, local variables in Class based component**
+
+When a class based component is loaded and rendered onto the browser, a new instance has been created for that component and a constructor function is invoked. Constructor function is a best place to receive props and create a state variables, in functional component we use hooks to create state variables but in class based component there is a small difference in syntax to create state variables.
+`this.state = {}` this syntax will be followed to create state variables, `this.state` is s reserved keyword in class base component.
+
+
+```jsx
+
+class About extends React.Component {
+    constructor (props) {
+        super(props)
+
+        this.state = {
+          /**
+           * state is a reserved keyword for creating state variables.
+           * this is a big whole object which contans the state variables. 
+          */
+         count: 0,
+         tap: 1
+        }
+    }
+
+    render() {
+      // To destructre our variables we will use this space e.g.  const {name} = this.props
+        return (
+            <div>
+                About us {this.props.name}
+                {this.state.count}
+                {this.state.tap}
+            </div>
+        )
+    }
+}
+
+```
+
+To update state variables in class based component React gives us a special function called `this.setState()` which takes an object `{}` as an argument in which we pass our updated values to state variables like this. `this.setState( { count: this.state.count +1 } )`
+
+
+**Lifecycle of Class based component | mounting/loading, update, unmounting**
+
+Mounting and loading points to the same statement, it means that how a class based component is put up onto the browser.
+There are sevrel lifecycle methos called before the component is rendered onto the browser. When a class based component is mounted, 
+a new instance of a class is created and `contructor()` is called aftet that the `render()` method is called, right after render method `componentDidMount()` method is called.
+In case of nested class based component how a life cycle of component mounting will work?
+Methods will be called in following order.
+
+> This is mounting lifecycle mentioned below
+
+- Parent Counstructor -> Parent Render -> Child Constructor -> Child Render -> Child Did mount -> Parent Did mount.
+
+-  Parent Counstructor -> Parent Render -> Child Constructor -> Child Render -> 2nd Child constructor -> 2nd Child render -> Child Did mount -> 2nd child did mount -> Parent did mount.
+
+
+`componentDidMount()` method is important and works like `useEffect()`, we use this method to call an API inside our class based components. 
+
+When we update the state variables using `this.setState()` update cycle is called. in this lifecycle React uses Dif algo and re-renders the component, in this life cycle constructor is not called only `render()` method is called. 
+After update is done `componentDidUpdate()` is called.
+
+> Never compare lifecycle of class based component from functional component, IT IS NOT THE SAME!
+
+When we are moving to other component or a component is unmounting/removing from DOM, `componentWillUnMount()` is called.
+We use this method to clean up the mess. in functional compnent useEffect hook there is a `return` keyword which returns a function.
+in that function we write the code if we want to remove something when component is unmounting or removing.
+
+```js
+useEffect(() =>{
+  return ()=> {
+    // code to remove something on unmount, like time intervels etc.
+  }
+}, [])
+```

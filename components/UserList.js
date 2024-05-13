@@ -13,11 +13,10 @@ const UserList = () => {
         const json = await data.json();
 
         setListOfUsers(json.products);
-        console.log("test")
     }
 
     useEffect(() => {
-        fetchData()
+        fetchData();
     }, []);
 
     return listOfUsers.length == 0 ? ( 

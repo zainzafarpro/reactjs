@@ -1,4 +1,5 @@
 import {useState} from "react";
+import { Link } from "react-router-dom";
 
 export const HeaderComponent = () => {
     const [loginBtn, setLoginBtn] = useState("Login")
@@ -10,7 +11,7 @@ export const HeaderComponent = () => {
             <nav className="nav">
                 <ul>
                     <li>Home</li>
-                    <li>About Us</li>
+                    <li><Link to={"/about"}>About Us</Link></li>
                     <li>Cart</li>
                     <li>
                         <button onClick={() => {
