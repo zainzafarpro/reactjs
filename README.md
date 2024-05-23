@@ -451,6 +451,50 @@ Now to handle error in our path we will define a new property in our route confi
 ])
  ```
 
+ **Route to component without reloading the header**
+
+ To keep our header/footer intact whenever we route to different components, we use `children` property inside our `createBrowserRouter` config. we will be creating routes for our components as children of our main component. `children` property takes an array of objects, a list of paths to our components.
+ To push our children into the place our main component gets render, we will use a Component provided by react router dom which is `<Outlet />`
+
+ This `<Outlet />` component will be filled according to the paths defined in children property. So basically Outlet is a placeholder which gets replaced by the assigned component according to the path.
+
+  ```jsx
+ const routes = createBrowserRouter([
+    {
+        path: '/',
+        element: <AppLayout />,
+        children: [
+          {
+              path: '/',
+              element: <UserList />,
+              errorElement: <PageNotFound />
+          }
+          {
+              path: '/about',
+              element: <About />,
+              errorElement: <PageNotFound />
+          }
+        ]
+        errorElement: <PageNotFound />
+    }
+])
+
+const AppLayout = () => {
+    return (
+        <div className="wrapper">
+            <HeaderComponent />
+            <Outlet />
+        </div>
+    )
+};
+
+ ```
+
+**Read dynamic content in routes**
+
+react-router-dom provides us a important hook called `useParams`. We can use this hook to read the dynamic paramters in our rout.
+
+
  # Episode - 8
 
  **Class based Components**

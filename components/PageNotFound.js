@@ -6,7 +6,6 @@ const PageNotFound = () => {
     return (
         <>
         <div>Opps!</div>
-        <p>{err.error.message}</p>
         </>
     )
 }

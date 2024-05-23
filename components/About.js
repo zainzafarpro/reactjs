@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 class About extends React.Component {
     constructor (props) {
@@ -20,9 +21,6 @@ class About extends React.Component {
             location: this.location ? this.location : 'Pakistan'
         })
 
-    }
-
-    componentDidUpdate() {
     }
 
     render() {

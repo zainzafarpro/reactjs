@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export const HeaderComponent = () => {
     const [loginBtn, setLoginBtn] = useState("Login")
@@ -10,12 +10,18 @@ export const HeaderComponent = () => {
             </div>
             <nav className="nav">
                 <ul>
-                    <li>Home</li>
+                    <li><NavLink to={'/'} className={({ isActive, isPending, isTransitioning }) =>
+    [
+      isPending ? "pending" : "",
+      isActive ? "active" : "",
+      isTransitioning ? "transitioning" : "",
+    ].join(" ")
+  }>Home</NavLink></li>
                     <li><Link to={"/about"}>About Us</Link></li>
                     <li>Cart</li>
                     <li>
                         <button onClick={() => {
-                            setLoginBtn("Logout")
+                            loginBtn === 'Login' ? setLoginBtn("Logout"): setLoginBtn("Login")
                         }}>{loginBtn}</button>
                     </li>
                 </ul>
