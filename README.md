@@ -1,4 +1,4 @@
-# React JS - a powerful JavaScript library | Notes from Namste React
+# 🚀 React JS - a powerful JavaScript library | Notes from Namste React
 
 What is the difference between a library and a framework?
 
@@ -604,3 +604,94 @@ useEffect(() =>{
   }
 }, [])
 ```
+
+# Episode - 9
+
+Writig clean code and in a modular fashion is a good thing. We should follow the single responsibility principle. Every component in our App should have the single responsibility either it can be fetching the data or displaying something onto the UI. 
+
+
+**Introduction to custom hooks**
+
+Hooks are nothing but a simple javaScript functions, hooks are like helper functions which helps us to do the certin task.
+We can create our own custom hooks in React. To represent the hook in React, normal we use `use` keyword along with the function name.
+for example in react `useEffect` `useState` `useParam` `useRoutError`. To create our own custom hook we will follow the same convension like
+`useSkillData()` 
+
+```jsx
+const useSkillData = () => {
+// Fetch data of something here
+
+return skillData;
+}
+``` 
+
+
+**Chunking, code spliting, Dynamic bundling, Lazy Loading, On-demand loading, Dynamic import**
+
+These terms belongs to a same process which is known as diving your code into small pieces and loading them when requested.
+suppose we have a large application and inside that we have multiple small application for example a booking platform
+which books your flights, hotels, trips etc. So booking platform is a whole big application and inside this we have multiple small applications
+like booking flights, hotels, trips etc. Each of the booking process is different to each other.
+
+In react our bundler Parcel bundles our code into a single file and loads its onto the browser. This is okay for small projects
+but think if we have 1000 components and that single files contains the code of those 1000 components.
+what will happens is our bundled file size will be increase and the applications will gets slower even if the file is minified.
+
+Here comes the code spliting, lazy loading, chunking into the picture. 
+
+see the example of [text](https://bookme.pk/)
+
+consider booking a Bus is a small project and it contains 100 components
+booking a flight is another a small project and it contains 100 components
+booking a traing is another small project and it contains another 100 components.
+
+So!! Bookeme.pk is a whole big project which contains a code of other 3 small projects along with its own code so in total consider
+we have 500 components code in total in our single bundled file.
+We are loading the code of 300 components altogather in our file even it is not required initially. This will make our application slower.
+
+To reduce the bundled file size and keep the enough code to run bookme.pk intially and load the flight booking project's code seprately when needed, React introduced the `lazy()` loading.
+
+We can lazy load our components and load them only when required. So our bundled file will not have the code of those components which are imported as `lazy()` inside our application. `lazy()` is a function which is provided to us by `react` and it takes a callback function which uses a `import()` function to import our component `import()` function takes the path of the file.
+
+```jsx
+import React from 'reat'
+
+const BookTrain = lazy(()=> import('./component/BookTrain'))
+const BookBus = lazy(()=> import('./component/BookBus'))
+
+```
+
+Now if we try to add this Component in our code like `<BookBus/>` it will not work.
+by Importing a component as lazy what happens is our main bundled file has now excluded the code of these 2 components.
+When we are on book a bus page a separate network call will be made and a separate file of BookBus.js will be loaded onto the browser, while the code is still laoding React will try to render that and it will cause error and it will suspend the rendering. To avoid that React recommends us to use `<Suspense/>` component provided by `react`.
+
+We will wrap our component into `<Suspense/>` and assign a `fallback` to `<Suspense/>` component.
+`fallback={}` takes a jsx code.
+
+```jsx
+
+const routes = createBrowserRouter([
+    {
+        path: '/',
+        element: <AppLayout />,
+        errorElement: <PageNotFound />,
+        children: [
+            {
+                path: '/book-bus',
+                element: <Suspense fallback={<div>Loading</div>}>
+                          <BookBus />
+                        </Suspense>,
+            },
+            {
+                path: '/book-train',
+                element: <Suspense fallback={<div>Loading</div>}>
+                          <BookTrain />
+                        </Suspense>,
+            }
+        ]
+    }
+])
+
+```
+
+What happens now is when we go to the `/book-bus` rout a separate network call will be made and code of book a bus component will be loaded onto the browser, This reduces the file size of our main file. This technique is known as lazy loading.

@@ -4,17 +4,38 @@ import HeaderComponent from "./components/HeaderComponent";
 import UserList from "./components/UserList";
 import {createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
 import About from "./components/About";
+import About1 from "./components/About1";
 import PageNotFound from "./components/PageNotFound";
 
 
-const AppLayout = () => {
-    return (
-        <div className="wrapper">
-            <HeaderComponent />
-            <Outlet />
-        </div>
-    )
-};
+// const AppLayout = () => {
+//     return (
+//         <div className="wrapper">
+//             <HeaderComponent />
+//             <About />
+//             <About1 />
+//         </div>
+//     )
+// };
+
+class AppLayout extends React.Component {
+    constructor(props){
+        super(props);
+        console.log('parent constructor called')
+    }
+
+    render() {
+        console.log('parent render called');
+        return (
+            <About></About>, 
+            <About1></About1>
+        )
+    }
+
+    componentDidMount() {
+        console.log('parent did mount called')
+    }
+}
 
 const routes = createBrowserRouter([
     {
@@ -37,4 +58,5 @@ const routes = createBrowserRouter([
 ])
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router={routes}/>)
+//root.render(<RouterProvider router={routes}/>)
+root.render(<AppLayout />)

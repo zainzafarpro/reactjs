@@ -1,10 +1,10 @@
-import React from "react";
+import {Component} from "react";
 import { useParams } from "react-router-dom";
 
-class About extends React.Component {
+class About extends Component {
     constructor (props) {
         super(props);
-
+        console.log('constructor 1 is called');
         this.state = {
             count: 0,
             login_name: '',
@@ -24,6 +24,8 @@ class About extends React.Component {
     }
 
     render() {
+
+        console.log('render 1 is called');
         
         let { name } = this.props;
         let {login_name, location} = this.state;
