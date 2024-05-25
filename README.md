@@ -619,6 +619,8 @@ for example in react `useEffect` `useState` `useParam` `useRoutError`. To create
 
 ```jsx
 const useSkillData = () => {
+// local state variables
+[skillData, setSkillData] = useState();
 // Fetch data of something here
 
 return skillData;
@@ -639,7 +641,7 @@ what will happens is our bundled file size will be increase and the applications
 
 Here comes the code spliting, lazy loading, chunking into the picture. 
 
-see the example of [text](https://bookme.pk/)
+see the example of [bookme.pk](https://bookme.pk/)
 
 consider booking a Bus is a small project and it contains 100 components
 booking a flight is another a small project and it contains 100 components
