@@ -612,7 +612,7 @@ Writig clean code and in a modular fashion is a good thing. We should follow the
 
 **Introduction to custom hooks**
 
-Hooks are nothing but a simple javaScript functions, hooks are like helper functions which helps us to do the certin task.
+Hooks are nothing but a simple javaScript functions, hooks are like helper functions which helps us to do the certin tasks.
 We can create our own custom hooks in React. To represent the hook in React, normal we use `use` keyword along with the function name.
 for example in react `useEffect` `useState` `useParam` `useRoutError`. To create our own custom hook we will follow the same convension like
 `useSkillData()` 
@@ -635,7 +635,7 @@ suppose we have a large application and inside that we have multiple small appli
 which books your flights, hotels, trips etc. So booking platform is a whole big application and inside this we have multiple small applications
 like booking flights, hotels, trips etc. Each of the booking process is different to each other.
 
-In react our bundler Parcel bundles our code into a single file and loads its onto the browser. This is okay for small projects
+In react our bundler Parcel bundles our code into a single file and loads it onto the browser. This is okay for small projects
 but think if we have 1000 components and that single files contains the code of those 1000 components.
 what will happens is our bundled file size will be increase and the applications will gets slower even if the file is minified.
 
@@ -697,3 +697,44 @@ const routes = createBrowserRouter([
 ```
 
 What happens now is when we go to the `/book-bus` rout a separate network call will be made and code of book a bus component will be loaded onto the browser, This reduces the file size of our main file. This technique is known as lazy loading.
+
+
+# Episode - 10
+
+Its all about using CSS frameworks, ChakaraUI, Bootstrap, TailwindCSS, Material UI
+
+# Episode - 11
+
+What is higher order component?
+
+It is the same as higher order function, A component which takes a component as an argument and returns a component as an output.
+
+In React, Higher order components takes a component as an input and enhance its functionality and send that enhanced version of component as an output.
+
+```jsx
+
+const Card = ()=> {
+  // some code of generic card
+}
+
+export const WithPremiumLabel = (Card)=> {
+  //This statement returns a function/component and we can receive props over here
+  return(props) => {
+    // some code of premium label: <div>Premium</div>
+    <Card {...props}/>
+  }
+}
+
+export default Card;
+
+```
+
+```jsx
+
+import Card, {WithPremiumLabel} from './components/Card';
+
+const CardWithPremiumLabel = WithPremiumLabel(Card);
+
+{data.premium ? <WithPremiumLabel cardData={data} /> : <Card cardData={data}/>}
+
+```
