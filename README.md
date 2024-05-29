@@ -735,7 +735,7 @@ the state is lifted up to their closest common ancestor. This common ancestor th
 
 **Props Drilling**
 
-Its a concept where we have to pass props has to go several layers of components to reach it destination. Each intermediary component in the hierarchy has to pass the prop down, even if it doesn't use the prop itself.
+Its a concept where we have to pass props and it has to go several layers of components to reach it destination. Each intermediary component in the hierarchy has to pass the prop down, even if it doesn't use the prop itself.
 
 > We should avoid props drilling, it is not recommended
 
@@ -770,15 +770,30 @@ for example we have fetched some data of user and we want to modify our data of 
 
 So we will be wrapping our main Component or a root level component into `<Context.Provider value={}/>` so the data can be available in all the nested components.
 
+To modify the data from a child component to root level, We will be passing a setUserData state function to the context provider so that we can modify the data via child component. see the example below
+
 ```jsx
 // fetched some data
 
 fetchedData = "data";
 
-<Context.Provider value={fetchedData}>
+<Context.Provider value={(fetchedData, setUserData)}>
   <Header />
   <Outlet />
 </Context.Provider>;
+
+// in header component
+
+const { fetchedData, setUserData } = useContext(UserContext);
+
+setUserData("some data");
+
+// to access in class based components: it takes a call back function
+<UserContext.Consumer>
+  {(props)=> (
+    // data can be access here via props
+  )}
+</UserContext.Consumer>;
 ```
 
 if we want this data to be available only for header and its child components, then simply we can wrap our context.provider on our header component.
