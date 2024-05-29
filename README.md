@@ -811,3 +811,13 @@ We can wrap our components into multiple context providers for example the code 
 ```
 
 Here we will have the fetched data available in our whole application and for header some other data will be used. This is perfectly valid code.
+
+> Install react developer toolkit extension in chrome.
+
+# Episode - 12
+
+**What is redux?**
+
+Redux is used to managing and centerlizing the state of your project.
+You can consider that redux is like a big whole javascript which stores the data of our application.
+In redux store we have slices to represent the categories of the data e.g slice for user data, slice for cart data.
