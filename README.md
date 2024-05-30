@@ -162,7 +162,12 @@ const HeadingComponent = () => {
  *  and we will wrap our jsx code into rounded brackets directly.
  * */
 
-const Heading2Component = () => <div className="hello">hello</div>;
+const Heading2Component = () => (
+  <>
+    <div></div>
+    <div className="hello">hello</div>
+  </>
+);
 
 /**
  * This is a way to render functional component
@@ -342,6 +347,7 @@ useEffect() is also a react hook and this is also a plain javascript function at
 `import {useEffect} from "react";`.
 useEffect hook takes 2 arguments. 1st a callback function and 2nd a dependency array `useEffect( () => {}, [])`.
 useEffect is called when our component is fully loaded and rendered. So whatever we pass inside useEffect's callback function it will be called after the component is rendered. 2nd argument is a dependency array in which we pass the dependency, it means now useEffect is dependent on the element which is passed inside the 2nd argument array, whenever the dependency changes useEffect will be called. if we pass nothing then it will be dependent on the component and now useEffect is called whenever the component is rendered or re-rendered.
+the second argument which is an array is optional, if we pass an empty array as second argument then useEffect will be called only once on initial render, if we don't pass this array, useEffect will be called on every re-render.
 
 > 2nd argument is a option argument.
 
@@ -697,10 +703,13 @@ const Card = () => {
 };
 
 export const WithPremiumLabel = (Card) => {
-  //This statement returns a function/component and we can receive props over here
+  //This statement returns a new component and we can receive props over here
   return (props) => {
-    // some code of premium label: <div>Premium</div>
-    <Card {...props} />;
+    // a function returns some piece of jsx so we will now return jsx here
+    return (
+      // some code of premium label: <div>Premium</div>
+      <Card {...props} />;
+    )
   };
 };
 
@@ -821,3 +830,7 @@ Here we will have the fetched data available in our whole application and for he
 Redux is used to managing and centerlizing the state of your project.
 You can consider that redux is like a big whole javascript which stores the data of our application.
 In redux store we have slices to represent the categories of the data e.g slice for user data, slice for cart data.
+To update the data of particular slice for example cart, we will have to go-through some process, we cannot update the data directly.
+To update the data when a user clicks on a add to cart button an action will be dispatched after and it will call a function will which is known as reducer function, that reducser function will update the data of cart.
+to read the data, Our cart component will have to subscribe that particular slice in redux store using a Selector.
+Whenever the data is update react will automatically renders it onto the screen.
