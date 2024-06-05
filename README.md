@@ -774,26 +774,26 @@ const user = useContext(UserContext);
 }
 ```
 
-to modify the value of Context react provides us a special component called `<Context.Provider value={}/>`.
+to modify the value of Context react provides us a special component called `<fileName.Provider value={}/>`.
 for example we have fetched some data of user and we want to modify our data of user and we want this modified data to be available in our whole app.
 
-So we will be wrapping our main Component or a root level component into `<Context.Provider value={}/>` so the data can be available in all the nested components.
+So we will be wrapping our main Component or a root level component into `<UserContext.Provider value={}/>` so the data can be available in all the nested components.
+Context is a global space which we can provide to our whole app by wrapping a root level component or a single component.
 
 To modify the data from a child component to root level, We will be passing a setUserData state function to the context provider so that we can modify the data via child component. see the example below
 
 ```jsx
 // fetched some data
+// in header component
+
+const { fetchedData, setUserData } = useState();
 
 fetchedData = "data";
 
-<Context.Provider value={(fetchedData, setUserData)}>
+<UserContext.Provider value={(fetchedData, setUserData)}>
   <Header />
   <Outlet />
-</Context.Provider>;
-
-// in header component
-
-const { fetchedData, setUserData } = useContext(UserContext);
+</UserContext.Provider>;
 
 setUserData("some data");
 
@@ -811,12 +811,12 @@ So the updated value will be available only in header and default value will be 
 We can wrap our components into multiple context providers for example the code below
 
 ```jsx
-<Context.Provider value={fetchedData}>
-  <Context.Provider value={"Some other value"}>
+<UserContext.Provider value={fetchedData}>
+  <OtherContext.Provider value={"Some other value"}>
     <Header />
-  </Context.Provider>
+  </OtherContext.Provider>
   <Outlet />
-</Context.Provider>
+</UserContext.Provider>
 ```
 
 Here we will have the fetched data available in our whole application and for header some other data will be used. This is perfectly valid code.
@@ -828,9 +828,119 @@ Here we will have the fetched data available in our whole application and for he
 **What is redux?**
 
 Redux is used to managing and centerlizing the state of your project.
-You can consider that redux is like a big whole javascript which stores the data of our application.
+You can consider that redux is like a big whole javascript object which stores the data of our application.
 In redux store we have slices to represent the categories of the data e.g slice for user data, slice for cart data.
 To update the data of particular slice for example cart, we will have to go-through some process, we cannot update the data directly.
 To update the data when a user clicks on a add to cart button an action will be dispatched after and it will call a function will which is known as reducer function, that reducser function will update the data of cart.
-to read the data, Our cart component will have to subscribe that particular slice in redux store using a Selector.
+to read the data, Our cart component will have to subscribe that particular slice in redux store using a **Selector**.
 Whenever the data is update react will automatically renders it onto the screen.
+
+To write a redux logic we use redux-toolkit package, it is a standard way of writing redux logic.
+
+> Redux is not mandatory for React
+
+We need to install 2 libraries to use Redux in react
+
+- Redux-toolkit (To write and use redux logic and maintain our states for project)
+- React-redux (This library helps use to connect redux with our React application)
+
+**Configure our Redux Store**
+
+To configure our store we have to import the `configureStore()` function from `@redux/toolkit`
+and use it to accordingly.
+
+```js
+import { configureStore } from "@reduxjs/toolkit";
+
+const reduxStore = configureStore({});
+
+export default reduxStore;
+```
+
+**Connect the store to application**
+
+Our store is configured and created, Now! we have to connect this to our react application, To connect the store we have to provide this store to our whole application, for that we will be using `react-redux` package. react-redux is kind of a birdge which helps us to connect our store to our applications
+
+To Provide the store we have to wrap the root level component into Provider and pass a store as props
+
+```js
+import { Provider } from "react-redux";
+
+//in App.js
+return (
+  <Provider store={reduxStore}>
+    <userContext.Provider value={{ userData, setUserData }}>
+      <HeaderComponent />
+      <Outlet />
+    </userContext.Provider>
+  </Provider>
+);
+```
+
+**Create Slice to store the data**
+
+Now we have to create different Slices to store our data as per need, For example we are going to create a slice for Cart, For that we will be using a special function known as `createSlice()` which is provided by `@redux/toolkit`.
+In createSlice() we will have to pass some configuration, following are the configs we need to set
+
+- name of our slice `{name: "cart"}`
+- initial state of our slice `{initialState: { items: [] }}`
+- reducers functions `{reducers: addItem (state, action) ...}`
+
+```js
+import { createSlice } from "@reduxjs/toolkit";
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: {
+    items: [],
+  },
+  reducers: {
+    addItem: (state, action) => {},
+    removeItem: (state, action) => {},
+  },
+});
+
+export default cartSlice;
+```
+
+Reducers functions have 2 parameters, `state` and `action`, state represents the state of the slice, and actions
+
+To export our slice properly we have to export 2 things
+
+- actions of our slice
+- Reducer
+
+```js
+export const { addItem, removeItem } = cartSlice.actions;
+export default cartSlice.reducer;
+```
+
+now! to add this slice into our main redux store we have to do one thing,
+We have to add our cart slice to main Reducer function. This reducer function is consist of small reducers function.
+
+```js
+const reduxStore = configureStore({
+  reducer: {
+    cart: cartSlice,
+  },
+});
+```
+
+**Access/read the data from the Slice**
+
+Now we have to read the data, To read the data from our Store, We have to subscribe to our particular slice in the store, To subscribe we will use a hook known as `useSelector()` which is provided by `react-redux`.
+This hook takes a callback function as an argument.
+This callback function will gives us the access to the store.
+
+```js
+const cartItems = useSelector((store) => store.cart.items);
+```
+
+**Update/Modify the Data in Slice**
+
+Now we have to update the data as per our need in the particular slice, To modify the data in slice, We have to to dispatch an actions which we have exported from our slice, Those actions will call a reducer functions to update our slice.
+To dispatch an action we will use a hook known as `useDispatch()` which is provided by `react-redux`. It will give us a function which will take an actions as an argument. we will provide the actions which we have exported from our slice.
+
+```js
+const dispatch = useDispatch();
+```

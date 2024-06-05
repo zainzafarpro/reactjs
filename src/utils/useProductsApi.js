@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 const useProductsApi = () => {
   const [products, setProducts] = useState([]);
+  const [filteredResult, setFilterResult] = useState([]);
   useEffect(() => {
     fetchData();
   }, []);
@@ -11,9 +12,10 @@ const useProductsApi = () => {
     const json = await data.json();
 
     setProducts(json);
+    setFilterResult(json);
   };
 
-  return products;
+  return [products, filteredResult, setFilterResult];
 };
 
 export default useProductsApi;
