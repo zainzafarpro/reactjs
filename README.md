@@ -943,4 +943,29 @@ To dispatch an action we will use a hook known as `useDispatch()` which is provi
 
 ```js
 const dispatch = useDispatch();
+
+function handleAddItem() {
+  dispatch(item);
+}
 ```
+
+# useMemo(), useRef()
+
+`useMemo()` is a react hook which helps us to memoize a value, for example are making an api call and storing a data in our redux store,
+and we have another state variable in our components which re-redners the component, on every re-render our API is getting called.
+To avoid this heavy operation we can use useMemo() hook to memorize the value which return from API call and not call an API again and again.
+useMemo() has to arguments: a callback function and a dependency or an array of dependencies.
+
+```jsx
+useMemo(() => {}, []);
+```
+
+`useRef()` is also an hook which helps us to remember a value and also we don't want to our component to re-render.
+useRef() returns us an object with the `current` key which holds the value.
+
+```jsx
+const ref = useRef(0);
+// thsi returns an object with the key current => {current:0}
+```
+
+so we will access this variable like `ref.current` and we can mutate the variable directly like `ref.current = ref.current + 1`;
